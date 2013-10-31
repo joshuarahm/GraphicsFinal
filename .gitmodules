@@ -1,3 +1,6 @@
 [submodule "glox"]
 	path = glox
 	url = git@github.com:joshuarahm/glox.git
+[submodule "slox"]
+	path = slox
+	url = git@github.com:joshuarahm/slox.git
