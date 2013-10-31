@@ -37,6 +37,9 @@ public:
     void onEvent( const SDL_Event& event ) { SloxRawEventHandler::onEvent( event ); }
 
     bool initialize( int argc, char** argv ) {
+        (void) argc;
+        (void) argv;
+        
         unsigned int tex = 0;
 
         SDL_Init( SDL_INIT_VIDEO );
@@ -78,10 +81,10 @@ public:
     }
 
     bool loop( uint32_t ticks ) {
+        (void) ticks;
 	    /* Set some parameters */
 	    GloxState::clear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	    GloxState::enable( GL_DEPTH_TEST );
-	    // GloxState::enable( GL_CULL_FACE );
 	    GloxState::loadIdentity();
     
 	    /* Translate to the this perspective */
