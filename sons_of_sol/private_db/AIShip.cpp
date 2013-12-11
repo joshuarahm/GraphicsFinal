@@ -24,7 +24,7 @@ void AIShip::setModel( slox::SloxModelObject* high, slox::SloxModelObject* med, 
     s_really_far_away_model = new glox::GloxCube( 4, 0.5, 8,  GloxColor(245,245,220) );
 }
 void AIShip::setUpdateFunction( Updater* updater ){
-        update_func = update_func;
+        update_func = updater;
 
         /* Update 3 times so we have a full set
          * of points to start with */
