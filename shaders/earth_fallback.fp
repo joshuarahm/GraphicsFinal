@@ -16,13 +16,13 @@ void main()
 
     vec4 color = texture2D(tex,gl_TexCoord[0].xy);
 
-    float bluef2  = (1.0f / (1.0f + exp(c * 20.0f))) * light;
-    float redf2   = (1.0f / (1.0f + exp(c * 20.0f))) * pow(light,2.0) * light;
+    float bluef2  = (1.0f / (1.0f + exp(c * 15.0f))) * light;
+    float redf2   = (1.0f / (1.0f + exp(c * 15.0f))) * pow(light,2.0) * light;
     float greenf2 = redf2;
 
     /* Each color has its own drop off rate */
 
-    float bluef  = pow(light, 3.0) ;
+    float bluef  = pow(light, 4.0) ;
     float greenf = pow(light, 2.0) ;
     float redf   = pow(light, 1.0) ;
 
@@ -31,8 +31,8 @@ void main()
     if( redf < 0.0 ) redf = 0.0 ; 
 
     gl_FragColor = vec4(
-        redf*color[0]   + 1000.0*redf2,
-        greenf*color[1] + 1000.0*greenf2,
-        bluef*color[2]  + 1000.0*bluef2,
+        redf*color[0]   + 10.0*redf2,
+        greenf*color[1] + 10.0*greenf2,
+        bluef*color[2]  + 10.0*bluef2,
         1.0 );
 }
