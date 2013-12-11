@@ -32,9 +32,13 @@ public:
 		m_dpitch( 0 ), 
 		m_dyaw( 0 ), 
 		m_droll( 0 ), 
+		m_droll_to( 0 ), 
 		m_dforward( 0 ), 
+		m_dforward_to( 0 ), 
 		m_dup( 0 ),
+		m_dup_to( 0 ),
 		m_dright( 0 ),
+		m_dright_to( 0 ),
         m_jitter( 0 ),
         m_is_firing( false ){} 
 
