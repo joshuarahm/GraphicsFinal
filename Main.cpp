@@ -2,13 +2,13 @@
 
 /* Include the class SloxApplication which 
  * will be the base class for this */
+#include "glox/GloxCommon.hpp"
 #include "slox/SloxApplication.hpp"
 #include "slox/SloxTextureFactory.hpp"
 #include "slox/SloxRawEventHandler.hpp"
 #include "slox/events/SloxFunctionQuitListener.hpp"
 
 #include "glox/GloxViewport.hpp"
-#include "glox/GloxCommon.hpp"
 #include "glox/GloxFirstPersonPerspective.hpp"
 #include "glox/objects/GloxTexturedCube.hpp"
 #include "glox/GloxColor.hpp"

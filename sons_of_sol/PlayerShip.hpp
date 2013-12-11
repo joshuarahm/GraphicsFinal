@@ -14,6 +14,13 @@
 #include "slox/events/SloxKeyListener.hpp"
 
 #include "ControlMotionListener.hpp"
+#include "sons_of_sol/Projectile.hpp"
+
+#include <vector>
+#include <queue>
+
+#define GUN_RATE 1
+#define N_LIVING_PROJECTILES (TTL / GUN_RATE)
 
 /* This is a class
  * for the first person
@@ -27,7 +34,9 @@ public:
 		m_droll( 0 ), 
 		m_dforward( 0 ), 
 		m_dup( 0 ),
-		m_dright( 0 ) {} 
+		m_dright( 0 ),
+        m_jitter( 0 ),
+        m_is_firing( false ){} 
 
 	/* Draw the heads-up-display of the
 	 * ship */
@@ -85,6 +94,14 @@ public:
 		return m_droll;
 	}
 
+    inline void setDForwardTo( float dforward ) {
+        m_dforward_to = dforward ;
+    }
+
+	inline float getDForward() {
+		return m_dforward;
+	}
+
 	virtual void onControlMotion( const ControlMotionEvent& evt );
 
 	inline const glox::GloxPoint<> getPosition() const {
@@ -94,6 +111,16 @@ public:
 	inline void setPosition( const glox::GloxPoint<>& pos ) {
 		m_position = pos;
 	}
+
+	inline void setJitter( float jitter ) {
+		m_jitter = jitter ;
+	}
+
+	inline float getJitter( ) {
+		return m_jitter ;
+	}
+
+    void drawProjectiles() ;
 private:
 	/* The position of the ship */
 	glox::GloxPoint<> m_position;
@@ -120,6 +147,12 @@ private:
 
 	float m_dright;
 	float m_dright_to;
+
+    float m_jitter ;
+
+    bool m_is_firing ;
+    std::vector<Projectile> m_living_projectiles ; 
+    std::queue<int> m_open_positions;
 };
 
 #endif /* SHIP_HPP_ */

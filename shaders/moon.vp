@@ -1,0 +1,11 @@
+uniform vec3 lightPos ;
+
+varying vec3 fragmentNormal ;
+varying vec3 lightVector ;
+
+void main() {
+	fragmentNormal = gl_Normal ;
+	lightVector = lightPos - gl_Vertex.xyz ;
+	gl_TexCoord[0] = gl_MultiTexCoord0;
+	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex ;
+}

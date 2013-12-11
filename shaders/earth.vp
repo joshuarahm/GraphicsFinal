@@ -1,0 +1,22 @@
+/* Light position of Sun */
+uniform vec3 lightPos ;
+
+/* Position of the -x axis */
+uniform vec3 cameraPos ;
+
+varying vec3 fragmentNormal;
+varying vec3 lightVector;
+varying vec3 cameraVector ;
+
+void main() {
+    /* Set the vectors and get the normal */
+    fragmentNormal = gl_Normal;
+    lightVector = lightPos - gl_Vertex.xyz;
+    cameraVector = cameraPos - gl_Vertex.xyz;
+    
+    /* Texture */
+    gl_TexCoord[0] = gl_MultiTexCoord0;
+    gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+}
+
+

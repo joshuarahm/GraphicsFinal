@@ -21,7 +21,7 @@ function generate_depends {
 	deps=$1
 	for i in $next ; do
 		for canidate in $(generate_depends $i) ; do
-			if [[ ! $deps =~ $i ]] ; then
+			if [[ ! $deps =~ $i ]] && [[ -f $i ]] ; then
 				deps="$deps \\$(echo -ne '\n                            ')$i"
 			fi
 		done
@@ -35,7 +35,7 @@ function generate_depends {
 
 # Iterate through and find the
 # c++ source files 
-for i in "$(find Main.cpp sons_of_sol/ | egrep '.*\.c(pp|xx)?$')" ; do
+for i in $(find Main.cpp sons_of_sol/ | egrep '.*\.c(pp|xx)?$') ; do
 	# add this file to the list of
 	# sources
     echo "Generating from source file: $i"
@@ -57,8 +57,9 @@ exec 3<> Makefile
 # some commonly used files to generate
 echo 'CPPC?=g++'>&3
 echo 'AR?=ar'>&3
-echo "CFLAGS=$CFLAGS -Wall -Wextra -I. -g3 -ggdb -D DEBUG_LEVEL_TRACE -Islox -Iglox">&3
-echo "LDFLAGS=$LDFLAGS -Lslox -Lglox -lslox -lglox -lGL -lGLU -lSDL -lm">&3
+echo 'OPTFLAGS?=-g3 -ggdb'>&3
+echo "CFLAGS=$CFLAGS -Wall -Wextra -I. "'$(OPTFLAGS)'" -D DEBUG_LEVEL_TRACE -Islox -Iglox">&3
+echo "LDFLAGS=$LDFLAGS -Lslox -Lglox -lslox -lglox -lGL -lGLU -lSDL -lm -ljpeg -lSDL_image -lGLEW">&3
 echo 'OBJECTS='${obs[@]}>&3
 echo 'BINARY='$BINARY_NAME>&3
 
@@ -74,7 +75,7 @@ echo -e 'setup:\n\tmkdir -p obs/\n'>&3
 echo -e \
 'submodules:
 	for i in $$(find */ -name Makefile) ; do \
-		pushd $$(dirname $$i) && make && popd; \
+		cd $$(dirname $$i) && make && cd ..; \
 	done
 '>&3
 
@@ -82,7 +83,7 @@ echo -e \
 'clean:
 	- rm -rf obs $(BINARY)
 	for i in $$(find */ -name Makefile) ; do \
-		pushd $$(dirname $$i) && make clean && popd; \
+		cd $$(dirname $$i) && make clean && cd ..; \
 	done'>&3
 
 # iterate through all of the objects and 
