@@ -13,68 +13,6 @@ using namespace std;
 float randJitter() {
 	return ((rand() & 0xFF) - 128.0) / (256.0 * 10) ;
 }
-void Cockpit()
-{
-   //  Screen edge
-//   float w = 1.8;
-   //  Save transform attributes (Matrix Mode and Enabled Modes)
-   glPushAttrib(GL_TRANSFORM_BIT|GL_ENABLE_BIT);
-   //  Save projection matrix and set unit transform
-   glMatrixMode(GL_PROJECTION);
-   glPushMatrix();
-   glLoadIdentity();
-   glOrtho(-1.8,+1.8,-1,1,-1,1);
-   //  Save model view matrix and set to indentity
-   glMatrixMode(GL_MODELVIEW);
-   glPushMatrix();
-   glLoadIdentity();
-   //  Draw instrument panel with texture
-   // glColor3f(1,1,1);
-   // glEnable(GL_TEXTURE_2D);
-   // glBegin(GL_QUADS);
-   // glTexCoord2d(0,0);glVertex2f(-2,-1);
-   // glTexCoord2d(1,0);glVertex2f(+2,-1);
-   // glTexCoord2d(1,1);glVertex2f(+2, 0);
-   // glTexCoord2d(0,1);glVertex2f(-2, 0);
-   // glEnd();
-   // glDisable(GL_TEXTURE_2D);
-   //  Draw the inside of the cockpit in grey
-//   glColor3f(0.6,0.6,0.6);
-//   glBegin(GL_QUADS);
-//   //  Port
-//   glVertex2f(-2,-1);
-//   glVertex2f(-2,+1);
-//   glVertex2f(-w,+1);
-//   glVertex2f(-w,-1);
-//   //  Starboard
-//   glVertex2f(+2,-1);
-//   glVertex2f(+2,+1);
-//   glVertex2f(+w,+1);
-//   glVertex2f(+w,-1);
-//   //  Port overhead
-//   glVertex2f(-2.00,+0.8);
-//   glVertex2f(-2.00,+1);
-//   glVertex2f(-0.03,+1);
-//   glVertex2f(-0.03,+0.9);
-//   //  Starboard overhead
-//   glVertex2f(+2.00,+0.8);
-//   glVertex2f(+2.00,+1);
-//   glVertex2f(+0.03,+1);
-//   glVertex2f(+0.03,+0.9);
-//   //  Windshield divide
-//   glVertex2f(-0.03,+1);
-//   glVertex2f(+0.03,+1);
-//   glVertex2f(+0.03,+0);
-//   glVertex2f(-0.03,+0);
-//   glEnd();
-   //  Reset model view matrix
-   glPopMatrix();
-   //  Reset projection matrix
-   glMatrixMode(GL_PROJECTION);
-   glPopMatrix();
-   //  Pop transform attributes (Matrix Mode and Enabled Modes)
-   glPopAttrib();
-}
 
 void SonsOfSolApplication::display() {
     if ( m_script_ttl >= 0 ) {
@@ -136,6 +74,7 @@ void SonsOfSolApplication::display() {
 		m_earth_prog->render() ;
 		m_earth_prog->setUniformVector3( m_earth_shader_light_pos,
 			m_light_manager.getLightSource(0)->getPosition() ) ;
+        m_earth_prog->setUniformFloat( m_earth_shader_time, SDL_GetTicks() / 300000.0 ) ;
 
 		//GloxPoint<> pos( GloxCos( ticks ) * FAR_DISTANCE_END/4.0, 0, GloxSin( ticks ) * FAR_DISTANCE_END/4.0 );
 		GloxPoint<> pos( -250000, 0, 0 );

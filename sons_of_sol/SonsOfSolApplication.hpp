@@ -175,6 +175,7 @@ private:
 	glox::GloxProgram* m_moon_prog ;
 	int m_earth_shader_light_pos ;
 	int m_earth_shader_camera_pos ;
+    int m_earth_shader_time ;
 	int m_moon_shader_light_pos ;
 	int m_moon_shader_camera_pos ;
 };

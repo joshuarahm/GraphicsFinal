@@ -3,6 +3,7 @@ uniform vec3 lightPos ;
 
 /* Position of the -x axis */
 uniform vec3 cameraPos ;
+uniform float time ;
 
 varying vec3 fragmentNormal;
 varying vec3 lightVector;
