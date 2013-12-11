@@ -201,8 +201,8 @@ bool SonsOfSolApplication::initialize( int argc, char** argv ) {
 	m_earth_shader_camera_pos = m_earth_prog->getUniformLocation( "cameraPos" );
     m_earth_shader_time = m_earth_prog->getUniformLocation( "time" ) ;
 
-	cout << "Earth light  " << m_earth_shader_light_pos  << endl;
-	cout << "Earth camera " << m_earth_shader_camera_pos << endl;
+	// cout << "Earth light  " << m_earth_shader_light_pos  << endl;
+	// cout << "Earth camera " << m_earth_shader_camera_pos << endl;
 
 	m_moon_prog = new GloxProgram() ;
 	if( m_moon_prog->attachShaderFromFile( "shaders/moon.vp", GL_VERTEX_SHADER ) ||

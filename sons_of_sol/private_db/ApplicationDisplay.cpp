@@ -41,7 +41,7 @@ void SonsOfSolApplication::display() {
             m_ship.setDForwardTo( 20 ) ;
 			enableLighting();
         }
-        cout << m_script_ttl << endl ;
+        // cout << m_script_ttl << endl ;
         m_script_ttl -= 1 ;
     }
 
