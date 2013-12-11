@@ -180,8 +180,19 @@ bool SonsOfSolApplication::initialize( int argc, char** argv ) {
     }
 
 	m_earth_prog = new GloxProgram() ;
+	
+
+	printf( "Using GLSL version %s\n", glGetString( GL_SHADING_LANGUAGE_VERSION ) );
+
+	const char* earth_frag_shader = "shaders/earth.fp";
+	float version = atof( (const char*) glGetString( GL_SHADING_LANGUAGE_VERSION ) );
+	if( version < 1.29 ) {
+		fprintf( stderr, "Using version %02f, unfortunately, I must use the fallback shader\n", version );
+		earth_frag_shader = "shaders/earth_fallback.fp";
+	}
+
 	if( m_earth_prog->attachShaderFromFile( "shaders/earth.vp", GL_VERTEX_SHADER ) ||
-		m_earth_prog->attachShaderFromFile( "shaders/earth.fp", GL_FRAGMENT_SHADER ) ||
+		m_earth_prog->attachShaderFromFile( earth_frag_shader, GL_FRAGMENT_SHADER ) ||
 		m_earth_prog->link() ) {
 		cerr << "Warning Unable to load shaders: " <<
 			GloxShader::getMessage() << endl;
