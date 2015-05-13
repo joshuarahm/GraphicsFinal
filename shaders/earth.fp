@@ -21,7 +21,7 @@ void main()
     float redf2   = 0.0f;
     float greenf2 = 0.0f;
 
-    if( f > 0 ) {
+    if( f > 0.0 ) {
         bluef2  = (1.0f / (1.0f + exp(c * 20.0f))) * f;
         redf2   = 200.0 * (1.0f / (1.0f + exp(c * 20.0f))) * pow(f,10.0) * f;
         greenf2 = 200.0 * (1.0f / (1.0f + exp(c * 20.0f))) * pow(f,15.0) * f;
